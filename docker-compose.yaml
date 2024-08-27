@@ -1,0 +1,24 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - API_KEY=${API_KEY}
+    networks:
+      app-network:
+        aliases:
+          - applicacao
+
+  translate-api:
+    extends:
+      file: /home/juliana/Documents/alura/webserie-entrevista/LibreTranslate/docker-compose.yml
+      service: libretranslate
+    networks:
+      app-network:
+        aliases:
+          - translateapi
+
+networks:
+  app-network:
+    driver: bridge
