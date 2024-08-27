@@ -12,12 +12,12 @@ export async function fetchMovie(movieName) {
   }
 }
 
-export async function fetchTranslation(movieInfo) {
+export async function fetchTranslation(moviePlot) {
   const URL = "http://localhost:5000/translate";
-  const req = await fetch(URL, {
+  const res = await fetch(URL, {
     method: "POST",
     body: JSON.stringify({
-      q: movieInfo,
+      q: moviePlot,
       source: "en",
       target: "pt",
       format: "text"
@@ -25,6 +25,6 @@ export async function fetchTranslation(movieInfo) {
     headers: { "Content-Type": "application/json" }
   });
 
-  const res = await req.json();
-  return res;
+  const translatedObj = await res.json();
+  return translatedObj;
 }

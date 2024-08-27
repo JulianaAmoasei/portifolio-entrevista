@@ -7,9 +7,9 @@ class MovieController {
     const movieName = req.query.movie;
     try {
       const movieInfo = await MovieService.getMovieInfo(movieName);
-      const response = formatMovieObject(movieInfo);
-      const translated = await MovieService.getTranslation(response);
-      res.status(200).json(translated);
+      const movieObj = formatMovieObject(movieInfo);
+      const translatedPlot = await MovieService.getTranslation(movieObj);
+      res.status(200).json(translatedPlot);
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
