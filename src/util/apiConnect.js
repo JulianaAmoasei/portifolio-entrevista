@@ -1,5 +1,5 @@
 async function fetchMovie(movieName) {
-  const URL = `http://www.omdbapi.com/?apikey=${process.env.API_KEY}&i=${movieName}&plot=full`
+  const URL = `http://www.omdbapi.com/?apikey=${process.env.API_KEY}&t=${movieName}&plot=full`
 
   try {
     const res = await fetch(URL);
@@ -13,4 +13,4 @@ async function fetchMovie(movieName) {
 
 }
 
-export default fetchMoviePlot;
+export default fetchMovie;
