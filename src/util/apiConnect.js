@@ -1,4 +1,4 @@
-async function fetchMovie(movieName) {
+export async function fetchMovie(movieName) {
   const URL = `http://www.omdbapi.com/?apikey=${process.env.API_KEY}&t=${movieName}&plot=full`
 
   try {
@@ -10,7 +10,21 @@ async function fetchMovie(movieName) {
   } catch (error) {
     return error;
   }
-
 }
 
-export default fetchMovie;
+export async function fetchTranslation(movieInfo) {
+  const URL = "http://localhost:5000/translate";
+  const req = await fetch(URL, {
+    method: "POST",
+    body: JSON.stringify({
+      q: movieInfo,
+      source: "en",
+      target: "pt",
+      format: "text"
+    }),
+    headers: { "Content-Type": "application/json" }
+  });
+
+  const res = await req.json();
+  return res;
+}

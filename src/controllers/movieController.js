@@ -1,5 +1,5 @@
 import MovieService from "../services/MovieService.js";
-import { formatMovieResponse } from "../util/helpers.js";
+import { formatMovieObject } from "../util/helpers.js";
 
 class MovieController {
 
@@ -7,10 +7,11 @@ class MovieController {
     const movieName = req.query.movie;
     try {
       const movieInfo = await MovieService.getMovieInfo(movieName);
-      const response = formatMovieResponse(movieInfo)
-      res.status(200).json(response);
+      const response = formatMovieObject(movieInfo);
+      const translated = await MovieService.getTranslation(response);
+      res.status(200).json(translated);
     } catch (error) {
-      res.status(500).json({ message: error.message }.Plot);
+      res.status(500).json({ message: error.message });
     }
   };
 };
